@@ -45,6 +45,7 @@
   ],
   "license": "0BSD",
   "scripts": {
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "gatsby build",
     "develop": "gatsby develop",
