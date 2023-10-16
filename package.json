@@ -45,8 +45,8 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "deploy": "gatsby clean gatsby build --prefix-paths && gh-pages -d public",
-    "deploy:ci": "gatsby build --prefix-paths && gh-pages -d public -r https://$GH_TOKEN@github.com/yenzokuhle/go-solr-client.git",
+    "deploy": "gatsby clean gatsby build && gh-pages -d public",
+    "deploy:ci": "gatsby build && gh-pages -d public -r https://$GH_TOKEN@github.com/yenzokuhle/go-solr-client.git",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",

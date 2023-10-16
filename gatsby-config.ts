@@ -57,7 +57,6 @@ const config: GatsbyConfig = {
       },
     },
   ],
-  pathPrefix: '/go-solr-client',
 };
 
 export default config;
