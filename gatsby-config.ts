@@ -10,6 +10,7 @@ require('dotenv').config({
 
 const config: GatsbyConfig = {
   pathPrefix: '/go-solr-client',
+  //assetPrefix: '/go-solr-client/',
   siteMetadata: {
     title: `GoSolr Technical ZA`,
     siteUrl: process.env.SITE_URL,
@@ -50,7 +51,7 @@ const config: GatsbyConfig = {
       options: {
         name: `Go Solr`,
         short_name: `GoSolr`,
-        start_url: `/`,
+        start_url: `/go-solr-client/`,
         background_color: `#000000`,
         theme_color: `#ffffff`,
         display: `standalone`,
@@ -59,7 +60,9 @@ const config: GatsbyConfig = {
     },
     {
       resolve: `gatsby-plugin-styled-components`,
-      options: {},
+    },
+    {
+      resolve: 'gatsby-plugin-asset-path',
     },
   ],
 };
