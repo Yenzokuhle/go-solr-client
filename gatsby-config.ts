@@ -57,6 +57,10 @@ const config: GatsbyConfig = {
         icon: `src/images/gosolr-logo-new.svg`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {},
+    },
   ],
 };
 
