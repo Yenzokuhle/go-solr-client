@@ -9,6 +9,7 @@ require('dotenv').config({
 });
 
 const config: GatsbyConfig = {
+  pathPrefix: '/go-solr-client',
   siteMetadata: {
     title: `GoSolr Technical ZA`,
     siteUrl: process.env.SITE_URL,
