@@ -1,0 +1,37 @@
+@import './reset.css';
+
+:root {
+  /* base colours */
+  --black: #000;
+  --white: #fff;
+  --background-color: #fdfdfd;
+
+  /* light grays */
+  --light-gray: #f4f4f4;
+  --light-gray-one: #e3e3e3;
+  --light-gray-description: #9aa3aa;
+
+  /* primary colours */
+  --gosolr-yellow--dark-primary: #ffbe00;
+  --gosolr-yellow-primary: #ffc800;
+  --gosolr-yellow-secondary: #ffdc00;
+
+  /* easings */
+  --easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --easeInQuart: cubic-bezier(0.5, 0, 0.75, 0);
+}
+
+body {
+  background-color: var(--white);
+  font-family: 'roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.async-hide {
+  opacity: 0 !important;
+}
+
+.MuiPaper-root .MuiList-root .MuiButtonBase-root {
+  font-size: 12px;
+}
