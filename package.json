@@ -1,7 +1,7 @@
 {
-  "name": "go-solr-technical",
+  "name": "go-solr-client",
   "private": true,
-  "homepage": "https://yenzokuhle.github.io/go-solr-technical",
+  "homepage": ".",
   "description": "Energy Calculator",
   "version": "0.1.0",
   "author": "Yenzokuhle Mdladla <yenzom@icloud.com>",
@@ -45,7 +45,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "deploy": "gatsby build && gh-pages -d public",
+    "deploy": "gatsby build && gh-pages -d public -b client-live",
     "deploy:ci": "gatsby build && gh-pages -d public -r https://$GH_TOKEN@github.com/yenzokuhle/go-solr-client.git",
     "build": "gatsby build",
     "develop": "gatsby develop",
