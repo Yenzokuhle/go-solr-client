@@ -72,3 +72,7 @@ yarn-error.log
 
 
 LICENSE
+src/gatsby-types.d.ts
+.vscode/settings.json
+yarn.lock
+.prettierrc
