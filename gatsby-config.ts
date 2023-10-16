@@ -19,7 +19,7 @@ const config: GatsbyConfig = {
     image: `/images/gosolr-logo-new.svg`,
     twitterUsername: '',
     copyright: `Copyright © 2023`,
-    author: `Yenzokuhle Mdladla`,
+    author: `Yenzokuhle`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
