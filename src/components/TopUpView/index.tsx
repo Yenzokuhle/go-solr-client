@@ -115,8 +115,8 @@ const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
                       values?.topUps?.length >= 2
                         ? null
                         : setFieldValue('topUps', [
-                            { name: `topUps[0].name`, value: 100 },
-                            { name: `topUps[1].name`, value: 100 },
+                            { name: `topUps[0].name`, value: 0 },
+                            { name: `topUps[1].name`, value: 0 },
                           ])
                     }
                   />
@@ -127,7 +127,7 @@ const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
                       values?.topUps?.length === 1
                         ? null
                         : setFieldValue('topUps', [
-                            { name: `topUps[0].name`, value: 100 },
+                            { name: `topUps[0].name`, value: 0 },
                           ])
                     }
                   />
@@ -166,11 +166,14 @@ const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
                         onClick={() =>
                           push({
                             name: `topUps[${values?.topUps.length}].name`,
-                            value: 100,
+                            value: 0,
                           })
                         }
                       >
-                        <img src={PlusIcon} alt={`Add new top up field`} />
+                        <img
+                          src={PlusIcon}
+                          alt={`Add new top up input field`}
+                        />
                       </AddField>
                     )}
                   </TopUpFields>
@@ -178,7 +181,7 @@ const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
               </div>
               <div className="top-up-totals">
                 <Total>
-                  <span>Total PM: </span>
+                  <span>Total p/m: </span>
                   {`R ${total}`}
                 </Total>
                 <PrimaryButton
@@ -287,14 +290,14 @@ const MainContainer = styled.main`
 `;
 
 const Total = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-family: 'roboto', sans-serif;
   font-weight: 500;
   font-style: normal;
   color: var(--black);
 
   span {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 400;
   }
 `;
