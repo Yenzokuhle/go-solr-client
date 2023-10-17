@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../helpers/breakpoints';
 import { PrimaryButton } from '../../elements';
 import { ENERGY_USING_ITEMS } from '../../helpers/constants';
+import { FieldArray } from 'formik';
 
 type Props = {
   activeItem?: boolean;
@@ -33,18 +34,41 @@ const UsagePicker: React.FC<Props> = ({
           </p>
         </div>
       </div>
-      <Picker>
-        {ENERGY_USING_ITEMS.map((item: BoxItem, idx) => (
-          <BoxItem key={`energy-item-${idx + 1}`}>
-            <div className="icon-box"></div>
-            <p>{item.value}</p>
-          </BoxItem>
-        ))}
-      </Picker>
-      <PrimaryButton
-        title="Continue"
-        isDisabled={false}
-        handleClick={() => handleContinue(2)}
+      <FieldArray
+        name="energyUsers"
+        render={({ form, push, remove }) => {
+          const { values } = form;
+          console.log(values?.energyUsers.length);
+          return (
+            <>
+              {' '}
+              <Picker>
+                {ENERGY_USING_ITEMS.map((item: BoxItem, idx) => {
+                  const existsInArray = form.values?.energyUsers.findIndex(
+                    (energyItem: BoxItem) => energyItem.name === item.name
+                  );
+                  return (
+                    <BoxItem
+                      key={`energy-item-${idx + 1}`}
+                      onClick={() =>
+                        existsInArray < 0 ? push(item) : remove(existsInArray)
+                      }
+                      className={existsInArray >= 0 ? 'box-active' : ''}
+                    >
+                      <div className="icon-box"></div>
+                      <p>{item.value}</p>
+                    </BoxItem>
+                  );
+                })}
+              </Picker>
+              <PrimaryButton
+                title="Continue"
+                isDisabled={values?.energyUsers.length === 0}
+                handleClick={() => handleContinue(2)}
+              />
+            </>
+          );
+        }}
       />
     </MainContainer>
   );
@@ -136,11 +160,18 @@ const BoxItem = styled.div`
     color: var(--black);
   }
 
-  &:hover {
-    .icon-box {
+  &.box-active {
+    div {
       background-color: var(--gosolr-yellow-primary);
     }
 
+    p {
+      color: var(--gosolr-yellow-primary);
+      font-weight: 500;
+    }
+  }
+
+  &:hover {
     p {
       color: var(--gosolr-yellow-primary);
       font-weight: 500;
