@@ -39,7 +39,8 @@ const LogoContainer = styled.div`
 
   @media (max-width: ${breakpoints.tabletMD}px) {
     .logo-image {
-      height: 3.25rem;
+      height: 3.35rem;
+      border-radius: 2.5rem;
     }
   }
 
@@ -150,6 +151,17 @@ const MainContainer = styled.header`
       font-size: 1.2rem;
     }
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    h1 {
+      font-size: 1rem;
+    }
+
+    .header-container {
+      height: 4rem;
+      padding: 0rem 1rem;
+    }
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -192,6 +204,7 @@ const CandidateView = styled.div`
   .candidate {
     color: var(--gosolr-yellow-primary);
     font-size: 1rem;
+    border-radius: 50%;
   }
 `;
 

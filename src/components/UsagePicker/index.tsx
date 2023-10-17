@@ -27,8 +27,8 @@ const UsagePicker: React.FC<Props> = ({
   return (
     <MainContainer>
       <div className="action-text">
-        <div className="light">
-          Tell us about your
+        <div className="intro-text">
+          <p className="light">Tell us about your</p>
           <p className="mid">
             home <span>electricity usage</span>
           </p>
@@ -41,7 +41,6 @@ const UsagePicker: React.FC<Props> = ({
           console.log(values?.energyUsers.length);
           return (
             <>
-              {' '}
               <Picker>
                 {ENERGY_USING_ITEMS.map((item: BoxItem, idx) => {
                   const existsInArray = form.values?.energyUsers.findIndex(
@@ -85,8 +84,13 @@ const MainContainer = styled.main`
     height: auto;
   }
 
-  .light {
+  .intro-text {
     width: 100%;
+    height: auto;
+    display: flex;
+  }
+
+  .light {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -95,6 +99,7 @@ const MainContainer = styled.main`
     font-weight: 400;
     font-style: normal;
     color: var(--black);
+    padding-right: 10px;
   }
 
   .mid {
@@ -127,9 +132,10 @@ const MainContainer = styled.main`
   @media (max-width: ${breakpoints.mobileLG}px) {
     align-items: center;
 
-    .action-text {
-      display: flex;
+    .intro-text {
       flex-direction: column;
+      align-items: center;
+      row-gap: 4px;
     }
   }
 `;
