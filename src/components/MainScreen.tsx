@@ -166,18 +166,13 @@ const MasterContainer = styled.div`
   }
 
   @media (max-width: ${breakpoints.mobileLG}px) {
-    padding: 0rem;
+    padding: 1rem;
   }
 `;
 
 const TopBar = styled.nav`
   width: 100%;
   height: auto;
-
-  @media (max-width: ${breakpoints.mobileLG}px) {
-    padding: 1rem;
-    padding-bottom: 0rem;
-  }
 `;
 
 const MainContent = styled.div`

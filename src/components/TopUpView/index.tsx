@@ -51,11 +51,9 @@ const BorderButtonContainer = styled.div`
   }
 
   &.is-active {
-    transform: scale(1.1);
     border: 1.5px solid var(--gosolr-yellow-secondary);
 
     p {
-      font-size: 1.15rem;
       color: var(--gosolr-yellow-secondary);
       font-weight: 500;
     }
@@ -207,14 +205,16 @@ const MainContainer = styled.main`
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding-bottom: 2rem;
     border-bottom: 1px solid #ededed;
-    align-items: center;
 
     .info-text {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      column-gap: 0.5rem;
+      padding-bottom: 1rem;
     }
 
     .light {
@@ -241,10 +241,10 @@ const MainContainer = styled.main`
     }
 
     .top-up-actions {
-      width: auto;
+      width: 100%;
       height: 100%;
       display: flex;
-      column-gap: 2rem;
+      column-gap: 1.5rem;
     }
   }
 
@@ -301,7 +301,7 @@ const Total = styled.p`
 
 const TopUpFields = styled.div`
   width: 100%;
-  min-height: 14rem;
+  min-height: 13rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -312,6 +312,13 @@ const TopUpFields = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 0.7rem;
+  }
+
+  @media (max-width: ${breakpoints.mobileLG}px) {
+    column-gap: 2rem;
+    .list {
+      flex: 1;
+    }
   }
 `;
 

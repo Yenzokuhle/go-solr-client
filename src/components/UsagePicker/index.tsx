@@ -103,7 +103,6 @@ const MainContainer = styled.main`
     font-weight: 500;
     font-style: normal;
     color: var(--gosolr-yellow-primary);
-    padding-left: 0.5rem;
 
     span {
       color: var(--black);
@@ -112,6 +111,7 @@ const MainContainer = styled.main`
 
   @media (max-width: ${breakpoints.tabletMD}px) {
     //align-items: center;
+    padding-bottom: 1rem;
   }
 
   @media (max-width: ${breakpoints.tabletSM}px) {
@@ -121,6 +121,15 @@ const MainContainer = styled.main`
 
     .mid {
       font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: ${breakpoints.mobileLG}px) {
+    align-items: center;
+
+    .action-text {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
@@ -133,6 +142,10 @@ const Picker = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
+
+  @media (max-width: ${breakpoints.mobileLG}px) {
+    width: 100%;
+  }
 `;
 
 const BoxItem = styled.div`
