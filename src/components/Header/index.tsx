@@ -174,6 +174,11 @@ const ModalContainer = styled.div`
   background-color: white;
   z-index: 20;
   border-radius: 18px;
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    right: 2rem;
+    top: 5rem;
+  }
 `;
 
 const CandidateView = styled.div`
@@ -205,7 +210,24 @@ const CandidateView = styled.div`
   .candidate {
     color: var(--gosolr-yellow-primary);
     font-size: 1rem;
-    border-radius: inherit;
+    -webkit-border-radius: 10px;
+    overflow: hidden;
+  }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    padding: 1.2rem;
+
+    .name {
+      font-size: 1.1rem;
+    }
+
+    .title {
+      font-size: 1;
+    }
+
+    .candidate {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -216,11 +238,14 @@ const PictureButton = styled.div`
   border: 1px solid var(--gosolr-yellow--dark-primary);
   cursor: pointer;
   overflow: hidden;
+  -webkit-border-radius: 50%;
+  overflow: hidden;
 
   .candidate {
     width: 2.75rem;
     height: 2.75rem;
     border-radius: inherit;
+    -webkit-border-radius: inherit;
   }
 
   img {
