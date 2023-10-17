@@ -82,6 +82,18 @@ const BButtonContainer = styled.div`
   @media (max-width: ${breakpoints.tabletSM}px) {
     padding: 0.35rem 1rem;
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    border: 1px solid var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+
+    p {
+      display: none;
+    }
+  }
 `;
 
 const SchemaValidation = Yup.object({

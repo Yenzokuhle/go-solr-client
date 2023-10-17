@@ -205,7 +205,7 @@ const CandidateView = styled.div`
   .candidate {
     color: var(--gosolr-yellow-primary);
     font-size: 1rem;
-    border-radius: 50%;
+    border-radius: inherit;
   }
 `;
 
@@ -220,7 +220,11 @@ const PictureButton = styled.div`
   .candidate {
     width: 2.75rem;
     height: 2.75rem;
-    border-radius: 50%;
+    border-radius: inherit;
+  }
+
+  img {
+    border-radius: inherit;
   }
 
   &:hover {
