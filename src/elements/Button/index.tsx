@@ -25,9 +25,10 @@ const PrimaryButton: React.FC<Props> = ({
 }: Props) => {
   return (
     <Container
-      onClick={handleClick}
+      onClick={() => (!isDisabled ? handleClick && handleClick() : null)}
       data-testid={'primaryButton'}
       disabled={isDisabled}
+      type={'button'}
     >
       <p>{title}</p>
     </Container>
@@ -62,6 +63,11 @@ const Container = styled.button`
 
   &:active {
     transform: scale(1);
+  }
+
+  &:disabled {
+    background-color: #a2a2a2;
+    cursor: not-allowed;
   }
 
   @media (max-width: ${breakpoints.mobileLG}px) {
