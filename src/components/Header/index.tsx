@@ -31,6 +31,7 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .logo-image {
     width: fit-content;
@@ -214,10 +215,11 @@ const PictureButton = styled.div`
   border-radius: 50%;
   border: 1px solid var(--gosolr-yellow--dark-primary);
   cursor: pointer;
+  overflow: hidden;
 
   .candidate {
-    width: 100%;
-    height: 100%;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 50%;
   }
 

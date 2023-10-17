@@ -81,6 +81,21 @@ const PillContainer = styled.div`
       font-size: 1rem;
     }
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    padding: 0.5rem 0.8rem;
+
+    &.is-active {
+      p {
+        font-size: 14px;
+      }
+    }
+
+    p {
+      width: max-content;
+      font-size: 12px;
+    }
+  }
 `;
 
 export type SidebarList = {
@@ -140,6 +155,14 @@ const MainContainer = styled.div`
       padding: 0rem;
       overflow-x: auto;
       justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tabletMD}px) {
+    height: auto;
+
+    .category-list {
+      column-gap: 10px;
     }
   }
 `;

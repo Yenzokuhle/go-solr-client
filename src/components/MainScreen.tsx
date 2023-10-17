@@ -247,20 +247,13 @@ const MainContent = styled.div`
     .sidebar {
       padding: 1rem 0rem;
       padding-top: 0rem;
+      margin-bottom: 1rem;
     }
 
     .content {
-      padding: 0rem 1rem;
-
       .info-sort-container {
         height: 2.5rem;
       }
-    }
-  }
-
-  @media (max-width: ${breakpoints.mobileSM}px) {
-    .sidebar {
-      margin-bottom: 1rem;
     }
   }
 `;

@@ -167,6 +167,26 @@ const PriceInfoResults = styled.div`
     font-weight: 200;
     font-size: 1.1rem;
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    padding-top: 1/4rem;
+
+    .dual-style-text {
+      font-size: 12px;
+
+      span {
+        font-size: 1.1rem;
+      }
+    }
+
+    .old-price {
+      font-size: 1.2rem;
+    }
+
+    .average-price {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Recommendation = styled.div`
@@ -202,6 +222,16 @@ const Recommendation = styled.div`
     color: var(--white);
     text-transform: capitalize;
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    .recommend-solution {
+      font-size: 12px;
+    }
+
+    .recommend-price {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 const Badge = styled.div`
@@ -217,6 +247,10 @@ const Badge = styled.div`
   right: 0;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    padding: 0.3rem 1.5rem;
+  }
 `;
 
 const AverageBreak = styled.div`
@@ -245,7 +279,7 @@ const AverageBreak = styled.div`
 
 export const ErrorScreen = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 18rem;
   display: flex;
   align-items: center;
   justify-content: center;

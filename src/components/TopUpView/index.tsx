@@ -102,9 +102,9 @@ const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
             <>
               <div className="top-up-info">
                 <div className="info-text">
-                  <p className="light">How many electricity </p>
+                  <p className="light">How do you</p>
                   <p className="mid">
-                    top ups <span>per month?</span>
+                    top up <span>electricity per month?</span>
                   </p>
                 </div>
                 <div className="top-up-actions">
@@ -287,6 +287,16 @@ const MainContainer = styled.main`
       }
     }
   }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    .top-up-info {
+      .info-text {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 2px;
+      }
+    }
+  }
 `;
 
 const Total = styled.p`
@@ -299,6 +309,14 @@ const Total = styled.p`
   span {
     font-size: 1.1rem;
     font-weight: 400;
+  }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    font-size: 1.2rem;
+
+    span {
+      font-size: 14px;
+    }
   }
 `;
 
