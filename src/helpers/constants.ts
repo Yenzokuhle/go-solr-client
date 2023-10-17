@@ -67,9 +67,4 @@ export const ENERGY_USING_ITEMS: BoxItem[] = [
     value: 'Pool pump',
     status: BACK_UP_STATUS.NOTBACKED,
   },
-  {
-    name: 'ten',
-    value: 'Ten',
-    status: BACK_UP_STATUS.NOTBACKED,
-  },
 ];
