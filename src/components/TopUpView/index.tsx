@@ -1,8 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { PrimaryButton } from '../../elements';
+import { InputField, PrimaryButton } from '../../elements';
 import { breakpoints } from '../../helpers/breakpoints';
 import { StaticImage } from 'gatsby-plugin-image';
+import { FieldArray } from 'formik';
+import PlusIcon from '../../images/icons/plus.svg';
+import { getTotalTopUps } from '../../helpers/utils';
 
 type BorderButtonProps = {
   title: string;
@@ -53,7 +56,7 @@ const BorderButtonContainer = styled.div`
 
     p {
       font-size: 1.15rem;
-      color: var(--white);
+      color: var(--gosolr-yellow-secondary);
       font-weight: 500;
     }
   }
@@ -92,47 +95,104 @@ type Props = {
 const TopUpView: React.FC<Props> = ({ handleContinue }: Props) => {
   return (
     <MainContainer>
-      <div className="top-up-info">
-        <div className="info-text">
-          <p className="light">How many electricity </p>
-          <p className="mid">
-            top ups <span>per month?</span>
-          </p>
-        </div>
-        <div className="top-up-actions">
-          <BorderButton
-            title="Prepaid"
-            isActive={false}
-            handleClick={() => console.log('BorderButton --> clicked ...')}
-          />
-          <BorderButton
-            title="Postpaid"
-            isActive={false}
-            handleClick={() => console.log('BorderButton --> clicked ...')}
-          />
-        </div>
-      </div>
-      <div className="top-up-items">
-        <Default>
-          <StaticImage
-            className="logo-image"
-            src={`../../images/newsletter-illustration.svg`}
-            alt={'Go Solr logo'}
-            objectFit="contain"
-            objectPosition="center"
-          />
-        </Default>
-      </div>
-      <div className="top-up-totals">
-        <Total>
-          <span>Total PM: </span> R0
-        </Total>
-        <PrimaryButton
-          title="Calculate"
-          handleClick={() => handleContinue(3)}
-          isDisabled={false}
-        />
-      </div>
+      <FieldArray
+        name="topUps"
+        render={({ form, push, remove }) => {
+          const { values, setFieldValue } = form;
+          const total = getTotalTopUps(values?.topUps);
+          return (
+            <>
+              <div className="top-up-info">
+                <div className="info-text">
+                  <p className="light">How many electricity </p>
+                  <p className="mid">
+                    top ups <span>per month?</span>
+                  </p>
+                </div>
+                <div className="top-up-actions">
+                  <BorderButton
+                    title="Prepaid"
+                    isActive={values?.topUps?.length >= 2}
+                    handleClick={() =>
+                      values?.topUps?.length >= 2
+                        ? null
+                        : setFieldValue('topUps', [
+                            { name: `topUps[0].name`, value: 100 },
+                            { name: `topUps[1].name`, value: 100 },
+                          ])
+                    }
+                  />
+                  <BorderButton
+                    title="Postpaid"
+                    isActive={values?.topUps?.length === 1}
+                    handleClick={() =>
+                      values?.topUps?.length === 1
+                        ? null
+                        : setFieldValue('topUps', [
+                            { name: `topUps[0].name`, value: 100 },
+                          ])
+                    }
+                  />
+                </div>
+              </div>
+              <div className="top-up-items">
+                {values?.topUps?.length === 0 ? (
+                  <Default>
+                    <StaticImage
+                      className="logo-image"
+                      src={`../../images/newsletter-illustration.svg`}
+                      alt={'Go Solr logo'}
+                      objectFit="contain"
+                      objectPosition="center"
+                    />
+                  </Default>
+                ) : (
+                  <TopUpFields>
+                    <div className={'list'}>
+                      {' '}
+                      {values?.topUps.map((item: number, idx: number) => (
+                        <InputField
+                          key={`input-field-${idx + 1}`}
+                          name={`topUps[${idx}].name`}
+                          val={`topUps[${idx}].value`}
+                          value={values.topUps[idx].value}
+                          label={`Top up ${idx + 1}`}
+                          type={'number'}
+                          hideIcon={idx < 2}
+                          handleDelete={() => remove(idx)}
+                        />
+                      ))}
+                    </div>
+                    {values?.topUps?.length >= 2 && (
+                      <AddField
+                        onClick={() =>
+                          push({
+                            name: `topUps[${values?.topUps.length}].name`,
+                            value: 100,
+                          })
+                        }
+                      >
+                        <img src={PlusIcon} alt={`Add new top up field`} />
+                      </AddField>
+                    )}
+                  </TopUpFields>
+                )}
+              </div>
+              <div className="top-up-totals">
+                <Total>
+                  <span>Total PM: </span>
+                  {`R ${total}`}
+                </Total>
+                <PrimaryButton
+                  title="Calculate"
+                  handleClick={() => handleContinue(3)}
+                  isDisabled={values?.topUps.length === 0 || total === 0}
+                />
+              </div>
+            </>
+          );
+        }}
+      />
     </MainContainer>
   );
 };
@@ -191,8 +251,8 @@ const MainContainer = styled.main`
   .top-up-items {
     width: 100%;
     flex: 1;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .top-up-totals {
@@ -239,6 +299,22 @@ const Total = styled.p`
   }
 `;
 
+const TopUpFields = styled.div`
+  width: 100%;
+  min-height: 14rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .list {
+    max-width: 18rem;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.7rem;
+  }
+`;
+
 const Default = styled.div`
   width: 100%;
   height: 12rem;
@@ -249,6 +325,29 @@ const Default = styled.div`
   .logo-image {
     width: auto;
     height: 100%;
+  }
+`;
+
+const AddField = styled.div`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  &:active {
+    transform: scale(1.02);
   }
 `;
 

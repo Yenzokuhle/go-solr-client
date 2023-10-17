@@ -7,9 +7,14 @@ import {
   TopUpView,
   UsagePicker,
 } from '../components';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import LeftIcon from '../images/icons/left-md.svg';
 
 import { breakpoints } from '../helpers/breakpoints';
 import { StaticImage } from 'gatsby-plugin-image';
+import { BACK_UP_STATUS } from './UsagePicker';
+import { FormState } from '../helpers/types';
 
 const BackButton = ({
   handleBackClick,
@@ -18,11 +23,10 @@ const BackButton = ({
 }): ReactElement => {
   return (
     <BButtonContainer onClick={handleBackClick}>
-      <StaticImage
+      <img
         className="arrow-left"
-        src={`../images/icons/left-md.svg`}
+        src={LeftIcon}
         alt={'left arrow icon back button'}
-        objectPosition="center"
       />
       <p>{'back'}</p>
     </BButtonContainer>
@@ -53,7 +57,7 @@ const BButtonContainer = styled.div`
   .arrow-left {
     width: 24px;
     height: 24px;
-    margin-right: 0.35rem;
+    margin-right: 0.3rem;
 
     img {
       width: 100%;
@@ -106,21 +110,38 @@ const MainScreen: React.FC<Props> = ({ category }: Props) => {
           )}
         </div>
         <div className="content">
-          {stage === 1 && (
-            <DynamicContainer>
-              <UsagePicker handleContinue={handlePageStage} />
-            </DynamicContainer>
-          )}
-          {stage === 2 && (
-            <DynamicContainer>
-              <TopUpView handleContinue={handlePageStage} />{' '}
-            </DynamicContainer>
-          )}
-          {stage === 3 && (
-            <DynamicContainer>
-              <ResultsCard amountSpent={5000} />
-            </DynamicContainer>
-          )}
+          <Formik
+            initialValues={{
+              energyUsers: [],
+              topUps: [],
+            }}
+            validationSchema={Yup.object({
+              energyUsers: Yup.array().required('Required'),
+              topUps: Yup.array().required('Required'),
+            })}
+            onSubmit={async (values, { setSubmitting }) => {
+              console.log(`Values`);
+              console.log(values);
+            }}
+          >
+            <Form>
+              {stage === 1 && (
+                <DynamicContainer>
+                  <UsagePicker handleContinue={handlePageStage} />
+                </DynamicContainer>
+              )}
+              {stage === 2 && (
+                <DynamicContainer>
+                  <TopUpView handleContinue={handlePageStage} />{' '}
+                </DynamicContainer>
+              )}
+              {stage === 3 && (
+                <DynamicContainer>
+                  <ResultsCard amountSpent={5000} />
+                </DynamicContainer>
+              )}
+            </Form>
+          </Formik>
         </div>
       </MainContent>
     </MasterContainer>
