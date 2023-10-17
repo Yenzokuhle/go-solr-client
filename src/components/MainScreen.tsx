@@ -12,9 +12,6 @@ import * as Yup from 'yup';
 import LeftIcon from '../images/icons/left-md.svg';
 
 import { breakpoints } from '../helpers/breakpoints';
-import { StaticImage } from 'gatsby-plugin-image';
-import { BACK_UP_STATUS } from './UsagePicker';
-import { FormState } from '../helpers/types';
 
 const BackButton = ({
   handleBackClick,
@@ -87,6 +84,28 @@ const BButtonContainer = styled.div`
   }
 `;
 
+const SchemaValidation = Yup.object({
+  energyUsers: Yup.array()
+    .of(
+      Yup.object().shape({
+        name: Yup.string(),
+        value: Yup.string(),
+        status: Yup.string(),
+      })
+    )
+    .required('Required'),
+  topUps: Yup.array()
+    .of(
+      Yup.object().shape({
+        name: Yup.string(),
+        value: Yup.number()
+          .moreThan(0, 'Top up amount should not be less or equal to zero')
+          .required('valid amount required'),
+      })
+    )
+    .required('Required'),
+});
+
 interface Props {
   category?: string;
 }
@@ -115,14 +134,8 @@ const MainScreen: React.FC<Props> = ({ category }: Props) => {
               energyUsers: [],
               topUps: [],
             }}
-            validationSchema={Yup.object({
-              energyUsers: Yup.array().required('Required'),
-              topUps: Yup.array().required('Required'),
-            })}
-            onSubmit={async (values, { setSubmitting }) => {
-              console.log(`Values`);
-              console.log(values);
-            }}
+            validationSchema={SchemaValidation}
+            onSubmit={async (values) => {}}
           >
             <Form>
               {stage === 1 && (
@@ -167,6 +180,7 @@ const MasterContainer = styled.div`
 
   @media (max-width: ${breakpoints.mobileLG}px) {
     padding: 1rem;
+    row-gap: 1rem;
   }
 `;
 
@@ -241,6 +255,12 @@ const MainContent = styled.div`
       .info-sort-container {
         height: 2.5rem;
       }
+    }
+  }
+
+  @media (max-width: ${breakpoints.mobileSM}px) {
+    .sidebar {
+      margin-bottom: 1rem;
     }
   }
 `;
