@@ -38,7 +38,6 @@ const UsagePicker: React.FC<Props> = ({
         name="energyUsers"
         render={({ form, push, remove }) => {
           const { values } = form;
-          console.log(values?.energyUsers.length);
           return (
             <>
               <Picker>

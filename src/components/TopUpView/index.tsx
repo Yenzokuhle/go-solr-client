@@ -262,6 +262,7 @@ const MainContainer = styled.main`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   @media (max-width: ${breakpoints.tabletSM}px) {

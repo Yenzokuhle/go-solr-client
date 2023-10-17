@@ -11,8 +11,6 @@ type Props = {
 
 const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
   const { values } = useFormikContext();
-  console.log(`Values`);
-  console.log(values);
 
   const [data, error, loading] = useAxios({
     url: '/calculate',
@@ -24,12 +22,6 @@ const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
       'Content-Type': 'application/json',
     },
   });
-
-  console.log(`data`);
-  console.log(data?.data?.data);
-
-  console.log(`loading`);
-  console.log(loading);
 
   if (loading) <p>Loading yow</p>;
   if (error)

@@ -38,7 +38,7 @@ const InputField: React.FC<Props> = ({
   };
 
   return (
-    <Container inFocus={false} hasValue={false} className={className}>
+    <Container className={className}>
       <Unit>
         <p>{'R'}</p>
       </Unit>
@@ -64,11 +64,7 @@ const InputField: React.FC<Props> = ({
   );
 };
 
-const Container = styled.div<{
-  inFocus: boolean;
-  error: boolean;
-  hasValue: boolean;
-}>`
+const Container = styled.div`
   width: 100%;
   position: relative;
   padding: 0.55rem 0.8rem;
@@ -93,15 +89,6 @@ const Container = styled.div<{
     &::placeholder {
       color: #231d1d;
     }
-
-    color: ${(props) => {
-      if (props.inFocus && !props.error) {
-        return 'var(--nflrs-blue-secondary)';
-      } else if (!props.inFocus) {
-        return 'var(--light-gray-three)';
-      }
-      return '#000';
-    }};
 
     &:active,
     &:focus {
