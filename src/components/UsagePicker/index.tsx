@@ -53,8 +53,9 @@ const UsagePicker: React.FC<Props> = ({
                       }
                       className={existsInArray >= 0 ? 'box-active' : ''}
                     >
-                      <div className="icon-box"></div>
-                      <p>{item.value}</p>
+                      <div className="icon-box">
+                        <p>{item.value}</p>
+                      </div>
                     </BoxItem>
                   );
                 })}
@@ -164,18 +165,23 @@ const BoxItem = styled.div`
   cursor: pointer;
 
   .icon-box {
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
     background-color: #f7f6f6;
     border-radius: 50%;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  p {
-    font-size: 1rem;
-    font-family: 'roboto', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--black);
+    p {
+      font-size: 1rem;
+      font-family: 'roboto', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      color: var(--black);
+      word-break: normal;
+      text-align: center;
+    }
   }
 
   &.box-active {
@@ -184,7 +190,7 @@ const BoxItem = styled.div`
     }
 
     p {
-      color: var(--gosolr-yellow-primary);
+      color: var(--black);
       font-weight: 500;
     }
   }
@@ -193,6 +199,12 @@ const BoxItem = styled.div`
     p {
       color: var(--gosolr-yellow-primary);
       font-weight: 500;
+    }
+
+    &.box-active {
+      p {
+        color: var(--white);
+      }
     }
   }
 

@@ -51,6 +51,10 @@
 
 - Unit test - (\*\* not full coverage)
 
+  ```shell
+  yarn test
+  ```
+
 - hosted on Github Pages
 
 - CI/CD active on repo to deploy on GitHub Pages
