@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Modal } from '../../elements';
 import { StaticImage } from 'gatsby-plugin-image';
 import { breakpoints } from '../../helpers/breakpoints';
+import Candidate from '../../images/candidate.jpeg';
 
 enum MODAL_TYPES {
   CART = 'CART',
@@ -90,11 +91,10 @@ const Header: React.FC<HeaderProps> = ({ onHomeScreen }: HeaderProps) => {
             data-testid={'pictureButton'}
             onClick={() => handleModalOpen(MODAL_TYPES.INFO)}
           >
-            <StaticImage
+            <img
               className="candidate"
-              src={`../../images/candidate.jpeg`}
+              src={Candidate}
               alt={'Candidate image'}
-              objectPosition="center"
             />
           </PictureButton>
         </div>
@@ -234,6 +234,9 @@ const CandidateView = styled.div`
 const PictureButton = styled.div`
   width: 2.75rem;
   height: 2.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   border: 1px solid var(--gosolr-yellow--dark-primary);
   cursor: pointer;
