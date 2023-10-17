@@ -1,12 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '../../helpers/breakpoints';
+import useAxios from '../../hooks/useAxios';
+import { useFormikContext } from 'formik';
+import { getTotalTopUps } from '../../helpers/utils';
 
 type Props = {
   amountSpent: number;
 };
 
 const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
+  const { values } = useFormikContext();
+  console.log(`Values`);
+  console.log(values);
+
+  const [data, error, loading] = useAxios({
+    url: '/calculate',
+    method: 'post',
+    data: {
+      amount: getTotalTopUps(values?.topUps),
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  console.log(`data`);
+  console.log(data?.data?.data);
+
+  console.log(`loading`);
+  console.log(loading);
+
+  if (loading) <p>Loading yow</p>;
+  if (error)
+    return (
+      <ErrorScreen>
+        <p>{'Something went wrong ...'}</p>
+      </ErrorScreen>
+    );
+
   return (
     <MainContainer>
       <PriceInfoResults>
@@ -15,7 +47,7 @@ const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
             Cost <span>without GoSolr</span>
           </p>
           <p className="old-price" data-testid={'inputPrice'}>
-            R 5000
+            {`R ${data?.data?.data?.amount}`}
           </p>
         </div>
         <AverageBreak>
@@ -27,7 +59,7 @@ const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
             Savings <span>with GoSolr</span>
           </p>
           <p className="average-price" data-testid={'recommAveragePrice'}>
-            R 3671
+            {`R ${data?.data?.data?.savingsGoSolr}`}
           </p>
         </div>
         <div className="horizontal vertical">
@@ -35,13 +67,15 @@ const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
             Total <span>without GoSolr</span>
           </p>
           <p className="average-price" data-testid={'recommTotalWitoutPrice'}>
-            R 5729
+            {`R ${data?.data?.data?.costTotal}`}
           </p>
         </div>
         <div className="horizontal vertical">
           <p className="dual-style-text">Difference</p>
           <p className="average-price" data-testid={'recommDifferencePrice'}>
-            R 729
+            {`R ${
+              data?.data?.data?.costTotal - getTotalTopUps(values?.topUps)
+            }`}
           </p>
         </div>
       </PriceInfoResults>
@@ -53,11 +87,11 @@ const ResultsCard: React.FC<Props> = ({ amountSpent }: Props) => {
 
         <div className="horizontal solution">
           <p className="recommend-solution">Solution</p>
-          <p className="recommend-price">Extra Large</p>
+          <p className="recommend-price">{data?.data?.data?.solution}</p>
         </div>
         <div className="horizontal pricing">
           <p className="recommend-solution">Price</p>
-          <p className="recommend-price">R 4400</p>
+          <p className="recommend-price">{`R ${data?.data?.data?.solutionPrice}`}</p>
         </div>
       </Recommendation>
     </MainContainer>
@@ -166,6 +200,7 @@ const Recommendation = styled.div`
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--white);
+    text-transform: capitalize;
   }
 `;
 
@@ -205,6 +240,21 @@ const AverageBreak = styled.div`
     height: 1px;
     background-color: #f1f1f1;
     margin-left: 1rem;
+  }
+`;
+
+export const ErrorScreen = styled.div`
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-size: 1.25rem;
+    font-family: RobotoRegular;
+    text-transform: capitalize;
+    color: red;
   }
 `;
 
