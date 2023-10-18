@@ -63,6 +63,10 @@
 
 ## Points would have fixed/added
 
+- gatsby: assetPrefix
+
+- More unit and integration tests
+
 ## Submission
 
 ## designs
