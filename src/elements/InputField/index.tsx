@@ -3,6 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TrashIcon from '../../images/icons/empty.svg';
+import { breakpoints } from '../../helpers/breakpoints';
 
 interface Props {
   name: string;
@@ -118,6 +119,10 @@ const Container = styled.div`
   span {
     font-size: 12px;
     color: red;
+  }
+
+  @media (max-width: ${breakpoints.mobileMD}px) {
+    padding: 0.4rem 0.6rem;
   }
 `;
 
